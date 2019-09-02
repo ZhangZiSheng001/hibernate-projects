@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * @ClassName: HibernateUtils
- * @Description: 主要用于加载配置文件，获取SessionFactory
+ * @Description: 这个工具类主要为了简化hibernate的连接获取和事务操作
  * @author: zzs
  * @date: 2019年9月2日 上午11:31:07
  */
@@ -24,6 +24,7 @@ public class HibernateUtils {
 	static {
 		init();
 	}
+
 	/**
 	 * @Title: getSessionFactory
 	 * @Description: 获取SessionFactory
@@ -38,7 +39,7 @@ public class HibernateUtils {
 		}
 		return sessionFactory;
 	}
-	
+
 	/**
 	 * @Title: getCurrentSession
 	 * @Description: 获取当前线程绑定的Session
@@ -51,8 +52,8 @@ public class HibernateUtils {
 			logger.warn("SessionFactory创建失败，请检查连接后再使用");
 		}
 		return sessionFactory.getCurrentSession();
-	}	
-	
+	}
+
 	/**
 	 * @Title: beginTransaction
 	 * @Description: 开启事务
@@ -68,7 +69,7 @@ public class HibernateUtils {
 		Transaction transaction = session.getTransaction();
 		transaction.begin();
 	}
-	
+
 	/**
 	 * @Title: commit
 	 * @Description: 提交事务
@@ -84,7 +85,7 @@ public class HibernateUtils {
 		Transaction transaction = session.getTransaction();
 		transaction.commit();
 	}
-	
+
 	/**
 	 * @Title: rollback
 	 * @Description: 回滚事务
@@ -100,7 +101,7 @@ public class HibernateUtils {
 		Transaction transaction = session.getTransaction();
 		transaction.rollback();
 	}
-	
+
 	/**
 	 * @Title: init
 	 * @Description: 加载配置文件，初始化SessionFactory

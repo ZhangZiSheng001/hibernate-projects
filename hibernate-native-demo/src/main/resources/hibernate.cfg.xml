@@ -30,7 +30,7 @@
         <property name="hibernate.c3p0.timeout">5000</property>
 		
 		<!-- 数据库方言配置 -->
-		<property name="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
 
 		<!-- 其他相关配置 -->
 		<!-- 显示hibernate在运行时候执行的sql语句 -->
@@ -42,6 +42,8 @@
 
 		<!-- 加载所有映射 -->
 		<mapping class="cn.zzs.hibernate.pojo.User" />
+		<mapping class="cn.zzs.hibernate.pojo.Role" />
+		<mapping class="cn.zzs.hibernate.pojo.Menu" />
 	</session-factory>
 </hibernate-configuration>
 

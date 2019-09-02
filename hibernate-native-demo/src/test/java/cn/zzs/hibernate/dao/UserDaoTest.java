@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import cn.zzs.hibernate.dao.impl.RoleDaoImpl;
 import cn.zzs.hibernate.dao.impl.UserDaoImpl;
 import cn.zzs.hibernate.pojo.User;
 import cn.zzs.hibernate.utils.HibernateUtils;
@@ -18,10 +19,11 @@ import cn.zzs.hibernate.utils.HibernateUtils;
  * @date: 2019年9月2日 上午11:59:11
  */
 public class UserDaoTest {
-	//UserDao
 	private UserDao userDao = new UserDaoImpl();
+	private RoleDao roleDao = new RoleDaoImpl();
+
 	private static Logger logger = LoggerFactory.getLogger(UserDaoTest.class);
-	
+
 	/**
 	 * 测试添加用户
 	 */
@@ -29,10 +31,11 @@ public class UserDaoTest {
 	public void testSave() {
 		//开启事务
 		HibernateUtils.beginTransaction();
-
 		//创建用户对象
-		User user = new User("zzs001", 18, new Date(), new Date());
+		User user = new User("zzs005", 18, new Date(), new Date());
 		try {
+			//设置用户角色
+			user.setRole(roleDao.find(2L));
 			//添加用户
 			userDao.save(user);
 			//提交事务
@@ -42,7 +45,7 @@ public class UserDaoTest {
 			logger.error("添加用户失败", e);
 		}
 	}
-	
+
 	/**
 	 * 测试根据id查询用户
 	 * @throws Exception 
@@ -54,7 +57,9 @@ public class UserDaoTest {
 
 		try {
 			//查询用户
-			System.out.println(userDao.find(1L));
+			User user = userDao.find(4L);
+			System.out.println(user);
+			System.out.println(user.getRole());
 			//提交事务
 			HibernateUtils.commit();
 		} catch (Exception e) {
@@ -62,7 +67,7 @@ public class UserDaoTest {
 			logger.error("查询用户失败", e);
 		}
 	}
-	
+
 	/**
 	 * 测试更新用户
 	 */
@@ -105,6 +110,7 @@ public class UserDaoTest {
 			logger.error("删除用户失败", e);
 		}
 	}
+
 	/**
 	 * 测试使用HQL查询用户
 	 */
@@ -116,7 +122,7 @@ public class UserDaoTest {
 			//查询用户
 			List<User> list = userDao.findByNameLikeWithPageUserHQL("zzs%", 0, 3);
 			//遍历查询结果
-			if(list!=null) {
+			if (list != null) {
 				for (User user : list) {
 					System.out.println(user);
 				}
@@ -128,6 +134,7 @@ public class UserDaoTest {
 			logger.error("查询用户失败", e);
 		}
 	}
+
 	/**
 	 * 测试使用QBC查询用户
 	 */
@@ -139,7 +146,7 @@ public class UserDaoTest {
 			//查询用户
 			List<User> list = userDao.findByNameLikeWithPageUserQBC("zzs%", 0, 3);
 			//遍历查询结果
-			if(list!=null) {
+			if (list != null) {
 				for (User user : list) {
 					System.out.println(user);
 				}
@@ -151,6 +158,7 @@ public class UserDaoTest {
 			logger.error("查询用户失败", e);
 		}
 	}
+
 	/**
 	 * 测试使用SQL查询用户
 	 */
@@ -162,7 +170,7 @@ public class UserDaoTest {
 			//查询用户
 			List<User> list = userDao.findByNameLikeWithPageUserSQL("zzs%", 0, 3);
 			//遍历查询结果
-			if(list!=null) {
+			if (list != null) {
 				for (User user : list) {
 					System.out.println(user);
 				}
@@ -172,6 +180,6 @@ public class UserDaoTest {
 		} catch (Exception e) {
 			HibernateUtils.rollback();
 			logger.error("查询用户失败", e);
-		}		
+		}
 	}
 }

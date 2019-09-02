@@ -3,10 +3,14 @@ package cn.zzs.hibernate.pojo;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -22,33 +26,53 @@ public class User {
 	 * 用户id
 	 */
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)//使用主键自动增长
+	@GeneratedValue(strategy = GenerationType.IDENTITY) //使用主键自动增长
 	@Column(name = "user_id")
 	private Long id;
-	
+
 	/**
 	 * 用户名
 	 */
-	@Column(name = "user_name")
+	@Column(name = "user_name", unique = true)
 	private String name;
-	
+
 	/**
 	 * 用户年龄
 	 */
 	@Column(name = "user_age")
 	private Integer age;
-	
+
+	/**
+	 * 用户角色
+	 */
+	@ManyToOne
+	@JoinColumn(name = "user_role_id", foreignKey = @ForeignKey(name = "none", value = ConstraintMode.NO_CONSTRAINT))
+	private Role role;
+
 	/**
 	 * 记录创建时间
 	 */
-	@Column(name = "gmt_create")	
+	@Column(name = "gmt_create")
 	private Date create;
-	
+
 	/**
 	 * 记录最后一次修改时间
 	 */
-	@Column(name = "gmt_modified")		
+	@Column(name = "gmt_modified")
 	private Date modified;
+
+	public User() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public User(String name, Integer age, Date create, Date modified) {
+		super();
+		this.name = name;
+		this.age = age;
+		this.create = create;
+		this.modified = modified;
+	}
 
 	public Long getId() {
 		return id;
@@ -90,17 +114,12 @@ public class User {
 		this.modified = modified;
 	}
 
-	public User() {
-		super();
-		// TODO Auto-generated constructor stub
+	public Role getRole() {
+		return role;
 	}
 
-	public User(String name, Integer age, Date create, Date modified) {
-		super();
-		this.name = name;
-		this.age = age;
-		this.create = create;
-		this.modified = modified;
+	public void setRole(Role role) {
+		this.role = role;
 	}
 
 	@Override
@@ -108,5 +127,5 @@ public class User {
 		return "User [id=" + id + ", name=" + name + ", age=" + age + ", create=" + create + ", modified=" + modified
 				+ "]";
 	}
-	
+
 }
