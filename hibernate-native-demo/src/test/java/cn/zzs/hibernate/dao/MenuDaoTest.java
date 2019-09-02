@@ -30,11 +30,11 @@ public class MenuDaoTest {
 		//开启事务
 		HibernateUtils.beginTransaction();
 		//创建菜单对象
-		//Menu menu = new Menu("系统菜单", "http://", 0, new Date(), new Date());
-		Menu menu = new Menu("销售订单申请", "http://", 0, new Date(), new Date());
+		Menu menu = new Menu("系统菜单", "http://", 0, new Date(), new Date());
+		//Menu menu = new Menu("销售订单申请", "http://", 0, new Date(), new Date());
 		try {
 			//设置父菜单
-			menu.setParent(menuDao.findByName("销售管理"));
+			//menu.setParent(menuDao.findByName("销售管理"));
 			//添加菜单
 			menuDao.save(menu);
 			//提交事务
