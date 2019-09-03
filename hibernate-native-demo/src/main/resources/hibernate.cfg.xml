@@ -8,9 +8,9 @@
 	<session-factory>
 		<!-- 数据库连接配置 -->
 		<property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/hibernate?useUnicode=true&amp;characterEncoding=utf8&amp;serverTimezone=GMT%2B8&amp;useSSL=true</property>
-		<property name="hibernate.connection.username">root</property>
-		<property name="hibernate.connection.password">root</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/hibernate?useUnicode=true&amp;characterEncoding=utf8&amp;serverTimezone=GMT%2B8&amp;useSSL=true</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">root</property>
 		<!-- 保证线程使用同一个连接 -->
 		<property name="hibernate.current_session_context_class">thread</property>
 		<!-- 设置事务隔离级别 -->
@@ -21,28 +21,28 @@
             4：TRANSACTION_REPEATABLE_READ
             8：TRANSACTION_SERIALIZABLE
         -->
-		<property name="hibernate.connection.isolation">4</property>
-		<!-- 指定连接池里最大连接数 -->
+        <property name="hibernate.connection.isolation">4</property>
+        <!-- 指定连接池里最大连接数 -->
         <property name="hibernate.c3p0.max_size">15</property>
         <!-- 指定连接池里最小连接数 -->
         <property name="hibernate.c3p0.min_size">3</property>
         <!-- 指定连接池里连接的超时时长 -->
         <property name="hibernate.c3p0.timeout">5000</property>
 		
-		<!-- 数据库方言配置 -->
-		<property name="hibernate.dialect">org.hibernate.dialect.MySQL55Dialect</property>
+        <!-- 数据库方言配置 -->
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQL55Dialect</property>
         <!-- 数据库引擎 -->
         <property name="hibernate.dialect.storage_engine">innodb</property>
         
-		<!-- 其他相关配置 -->
-		<!-- 显示hibernate在运行时候执行的sql语句 -->
+        <!-- 其他相关配置 -->
+        <!-- 显示hibernate在运行时候执行的sql语句 -->
 		<property name="hibernate.show_sql">true</property>
-		<!--  格式化sql -->
-		<!-- <property name="hibernate.format_sql">true</property> -->
-		<!-- 自动建表 -->
-		<property name="hibernate.hbm2ddl.auto">update</property>
+        <!--  格式化sql -->
+        <!-- <property name="hibernate.format_sql">true</property> -->
+        <!-- 自动建表 -->
+        <property name="hibernate.hbm2ddl.auto">update</property>
 
-		<!-- 加载所有映射 -->
+		<!-- 加载所有映射，扫描注解 -->
 		<mapping class="cn.zzs.hibernate.pojo.User" />
 		<mapping class="cn.zzs.hibernate.pojo.Role" />
 		<mapping class="cn.zzs.hibernate.pojo.Menu" />
