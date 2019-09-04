@@ -13,7 +13,7 @@ MySQL - 5.5.27 : Database - mybatis
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-USE `springdata`;
+USE `hibernate`;
 
 /*Table structure for table `jpa_menu` */
 
